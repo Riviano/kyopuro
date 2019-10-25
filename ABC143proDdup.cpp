@@ -13,11 +13,16 @@ using VI = vector<int>;
 
 int main(){
   int n;cin >> n;
-  vector<char> a(n);
-  for(auto &i:a) cin >> i;
-  int ans = 0;
-  rep(i,n-1){
-    if(a[i]!=a[i+1]) ans++;
+  vector<int> l(n);
+  rep(i,n) cin >> l[i];
+  sort(l.begin(),l.end());
+  Int ans = 0;
+  //aとbの固定
+  for(int i=0;i<n;i++){
+    for(int j=i+1;j<n;j++){
+      int k = lower_bound(l.begin(),l.end(),l[i]+l[j]) - l.begin();
+      ans +=max(k-(j+1),0);
+    }
   }
-  cout << ans+1 << endl;
+  cout << ans << endl;
 }

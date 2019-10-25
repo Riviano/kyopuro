@@ -12,12 +12,21 @@ using ll = long long;
 using VI = vector<int>;
 
 int main(){
-  int n;cin >> n;
-  vector<char> a(n);
-  for(auto &i:a) cin >> i;
-  int ans = 0;
-  rep(i,n-1){
-    if(a[i]!=a[i+1]) ans++;
+  int n,m;cin >> n >> m;
+  vector<pair<Int,Int>> data(n);
+  rep(i,n){
+    Int a,b;cin >> a >> b;
+    data[i] = make_pair(a,b);
   }
-  cout << ans+1 << endl;
+  sort(data.begin(),data.end());
+  Int ans = 0;
+  rep(i,n){
+    m-=data[i].second;
+    ans+=data[i].first*data[i].second;
+    if(m<=0){
+      ans-=abs(m)*data[i].first;
+      break;
+    }
+  }
+  cout << ans << endl;
 }

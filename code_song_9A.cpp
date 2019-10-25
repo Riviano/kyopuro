@@ -12,12 +12,14 @@ using ll = long long;
 using VI = vector<int>;
 
 int main(){
-  int n;cin >> n;
-  vector<char> a(n);
-  for(auto &i:a) cin >> i;
-  int ans = 0;
-  rep(i,n-1){
-    if(a[i]!=a[i+1]) ans++;
+  string s;cin >> s;
+  int iti = 0;
+  int zero = 0;
+  if(s.size()==1){cout << 0 << endl;return 0;}
+  for(auto &i:s){
+    if(i=='1') iti++;
+    else zero++;
   }
-  cout << ans+1 << endl;
+  cout << min(iti,zero)*2 << endl;
+  return 0;
 }
