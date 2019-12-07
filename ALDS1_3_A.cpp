@@ -1,28 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
-int a,b;
-int main(){
+int top,S[1000];
 
-  char s;
-  vector<char> n;
-  while(cin >> s){
-    if(s!='+'&&s!='-'&&s!='*') n.push_back(s);
-    else{
-      int a = n[n.size()-1]-'0';
-      int b = n[n.size()-2]-'0';
-      n.pop_back();
-      n.pop_back();
-      if(s=='+'){
-        n.push_back((a+b)+'0');
-      }
-      if(s=='-'){
-        n.push_back((a-b)+'0');
-      }
-      if(s=='*'){
-        n.push_back((a*b)+'0');
-      }
+void push(int x){
+  top = top+1;
+  S[top] = x;
+}
+int pop(void){
+  top--;
+  return S[top+1];
+}
+int main(){
+  int a,b;
+  top = 0;
+  char k[100];
+  while(scanf("%s",k)!=EOF){
+    if(k[0]=='+'){
+      a=pop();
+      b=pop();
+      push(a+b);
+    }else if(k[0]=='-'){
+      b=pop();
+      a=pop();
+      push(a-b);
+    }else if(k[0]=='*'){
+      a=pop();
+      b=pop();
+      push(a*b);
+    }else{
+      push(stoi(k));
     }
   }
-  if(n.size()>=2) 
-  cout << n.back() << endl;
+  cout << pop() << endl;
 }

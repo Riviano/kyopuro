@@ -1,17 +1,20 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-#define KAZU 12
-int main(){
-int i;
-char data[KAZU];
+int main(int argc, const char * argv[]) {
+    unsigned int i;
+    unsigned int moto=-1;
+    unsigned int seed = (unsigned int)time(NULL);
+    for (i = 0;;i++) {
+        moto = rand();
+        printf("%d, \n", moto);
+        if(moto==520932930){
+          printf("yattaze%d\n",rand());
+          break;
+        }
+    }
+    putchar('\n');
 
-
-for(i=0; i <  KAZU; i++ ){
-    scanf("%c",&data[i];
-  printf("%c",data[i]);
-  if(i == 4) printf(" ");
-}
-printf
-  return 0;
+    return 0;
 }

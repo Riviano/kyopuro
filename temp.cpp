@@ -11,6 +11,17 @@ typedef pair<int,int> P;
 using ll = long long;
 using VI = vector<int>;
 
+ios::sync_with_stdio(false);
+cin.tie(nullptr);
+
+auto output_all = []( auto first, auto last )
+{
+    for ( auto iter = first ; iter != last ; ++iter )
+    {
+        std::cout << *iter << "\n"s ;
+    }
+} ;
+
 #define SUM(vec) accumulate(ALL((vec)), 0)  // 0 は初期値
 #define COPY(vec1, vec2) copy(ALL(vec1), back_inserter(vec2))  // vec1をvec2にコピーする vec2は空にしておく必要あり
 #define PI 3.14159265359
