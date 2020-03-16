@@ -1,55 +1,51 @@
 #include <bits/stdc++.h>
-using namespace std;
-#define ALL(v) (v).begin(), (v).end()
-#define REP(i, p, n) for (int i = p; i < (int)(n); ++i)
-#define rep(i, n) REP(i, 0, n)
-#define SZ(x) ((int)(x).size())
-#define debug(x) cerr << #x << ": " << x << '\n'
-#define INF 999999999
-typedef long long int Int;
-typedef pair<int, int> P;
-using ll = long long;
-using VI = vector<int>;
 
-int main()
+using namespace std;
+typedef long long ll;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef vector<ll> VL;
+typedef vector<VL> VVL;
+typedef pair<int, int> PII;
+
+#define FOR(i, a, n) for (ll i = (ll)a; i < (ll)n; ++i)
+#define REP(i, n) FOR(i, 0, n)
+#define ALL(x) x.begin(), x.end()
+#define IN(a, b, x) (a<=x&&x<b)
+#define MP make_pair
+#define PB push_back
+const int INF = (1LL<<30);
+const ll LLINF = (1LL<<60);
+const double PI = 3.14159265359;
+const double EPS = 1e-12;
+const int MOD = 1000000007;
+//#define int ll
+
+template <typename T> T &chmin(T &a, const T &b) { return a = min(a, b); }
+template <typename T> T &chmax(T &a, const T &b) { return a = max(a, b); }
+
+int dx[] = {0, 1, 0, -1}, dy[] = {1, 0, -1, 0};
+
+int a[305][305], dp[305][305];
+signed main(void)
 {
   int n;
   cin >> n;
-  vector<pair<int, int>> xy(n);
-  vector<int> h(n);
-  map<string, int> mp;
-  rep(i, n)
-  {
-    cin >> xy[i].first >> xy[i].second >> h[i];
-  }
-  sort(h.begin(),h.end());
-  int maxh=h[0];
-  for (int cx = 0; cx <= 100; cx++)
-  {
-    for (int cy = 0; cy <= 100; cy++)
-    {
-      for (int ch = maxh + 200; ch >= 1; ch--)
-      {
-        bool flag = true;
-        string k = to_string(cx) + " " + to_string(cy) + " " + to_string(ch);
-        rep(i,n)
-        {
-          if (h[i] != max(ch - abs(xy[i].first - cx) - abs(xy[i].second - cy), 0))
-          {
-            flag = false;
-          }
-        }
-        if (flag)
-        {
-          cout << k << endl;
-          return 0;
-        }
-      }
+  REP(i, n) REP(j, n) cin >> a[i][j], dp[i][j] = a[i][j];
+
+  REP(k, n) REP(i, n) REP(j, n) {
+    if(k == i || k == j || i == j || dp[i][k] == INF || dp[k][j] == INF) continue;
+    if(dp[i][k] + dp[k][j] == a[i][j]) {
+      dp[i][j] = INF;
+    } else if(dp[i][k] + dp[k][j] < a[i][j]) {
+      cout << -1 << endl;
+      return 0;
     }
   }
-  for (auto &i : mp)
-  {
-    if (i.second >= n)
-      cout << i.first << endl;
-  }
+
+  ll sum = 0;
+  REP(i, n) REP(j, n) if(dp[i][j] != INF) sum += dp[i][j];
+  cout << sum/2 << endl;
+
+  return 0;
 }

@@ -5,12 +5,16 @@ using namespace std;
 #define rep(i,n) REP(i,0,n)
 #define SZ(x) ((int)(x).size())
 #define debug(x) cerr << #x << ": " << x << '\n'
-#define INF 999999999
+
 typedef long long int Int;
 typedef pair<int,int> P;
 using ll = long long;
 using VI = vector<int>;
+template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
+template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
+const long long INF = 1LL<<60;
 
+using Graph = vector<vector<int>>;
 ios::sync_with_stdio(false);
 cin.tie(nullptr);
 
@@ -27,8 +31,6 @@ auto output_all = []( auto first, auto last )
 #define PI 3.14159265359
 const int MOD = 1e9+7;
 #define UNIQUE(v) v.erase( unique(v.begin(), v.end()), v.end() );
-template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
-template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 
 
 
@@ -59,7 +61,18 @@ map< int64_t, int > prime_factor(int64_t n) {
   return ret;
 }//素因数分解
 
-
+/*dfsテンプレート！！
+// v は現在見ている頂点, p は v の親
+void dfs(int v,int p){
+  for(auto nv:G[v]){
+    if(nv==p) continue;//これがツリー探索で一般的な書き方
+    dfs(nv,v);
+  }
+}
+int main(){
+  int root = 0;
+  dfs(root,-1);
+}*/
 
 
 
